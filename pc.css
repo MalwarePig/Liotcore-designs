@@ -1,4 +1,4 @@
- * {
+* {
      margin: 0;
      padding: 0;
      box-sizing: border-box;
@@ -158,7 +158,7 @@
  }
 
  .nav-menu a {
-     color: white;
+     color: #ffffff;
      text-decoration: none;
      transition: color 0.3s ease;
      position: relative;
@@ -242,7 +242,7 @@
 
  .hero h1 {
      font-size: 4rem;
-     color: white;
+     color: #ffffff;
      margin-bottom: 1rem;
      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
  }
@@ -265,7 +265,7 @@
      display: inline-block;
      padding: 15px 30px;
      background: linear-gradient(45deg, #00d4ff, #0099cc);
-     color: white;
+     color: #ffffff;
      text-decoration: none;
      border-radius: 50px;
      font-weight: bold;
@@ -299,6 +299,10 @@
      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
  }
 
+ .seo-content .section-title {
+     color: #1a1a1a;
+ }
+
  .seo-grid {
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -321,13 +325,13 @@
  }
 
  .seo-card h3 {
-     color: #00d4ff;
+     color: #1a1a1a;
      font-size: 1.5rem;
      margin-bottom: 1rem;
  }
 
  .seo-card p {
-     color: #666;
+     color: #4a4a4a;
      line-height: 1.7;
      margin-bottom: 1rem;
  }
@@ -378,8 +382,11 @@
      text-align: center;
      font-size: 3rem;
      margin-bottom: 3rem;
-     color: #333;
      animation: fadeInUp 1s ease-out;
+ }
+
+ .about .section-title {
+     color: #1a1a1a;
  }
 
  .about-content {
@@ -395,13 +402,13 @@
 
  .about-text h3 {
      font-size: 2rem;
-     color: #333;
+     color: #1a1a1a;
      margin-bottom: 1rem;
  }
 
  .about-text p {
      font-size: 1.1rem;
-     color: #666;
+     color: #4a4a4a;
      margin-bottom: 1.5rem;
      line-height: 1.8;
  }
@@ -412,9 +419,7 @@
  }
 
  .tech-icon {
-     width: 300px;
-     height: 300px;
-     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     width: 100%;
      border-radius: 20px;
      display: flex;
      align-items: center;
@@ -423,10 +428,16 @@
      color: white;
      margin: 0 auto;
      transition: transform 0.3s ease;
+     animation: float 3s ease-in-out infinite;
  }
 
  .tech-icon:hover {
      transform: rotateY(10deg) rotateX(10deg);
+ }
+
+ .tech-icon img {
+     width: 100%;
+     border-radius: 15px;
  }
 
  /* Services Section */
@@ -447,46 +458,76 @@
      background: linear-gradient(90deg, transparent, #00d4ff, #0099cc, transparent);
  }
 
- .services-grid {
-     display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-     gap: 2rem;
-     margin-top: 3rem;
+ .services .section-title {
+     color: #ffffff;
  }
 
- .service-card {
-     background: rgba(255, 255, 255, 0.05);
-     padding: 2rem;
-     border-radius: 15px;
-     text-align: center;
-     backdrop-filter: blur(10px);
-     border: 1px solid rgba(255, 255, 255, 0.1);
-     transition: all 0.3s ease;
-     animation: fadeInUp 1s ease-out;
- }
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: stretch;
+}
 
- .service-card:hover {
-     transform: translateY(-10px);
-     background: rgba(255, 255, 255, 0.1);
-     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
- }
+.service-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0;
+    border-radius: 15px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease-out;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
- .service-icon {
-     width: 80px;
-     height: 80px;
-     background: linear-gradient(45deg, #00d4ff, #0099cc);
-     border-radius: 50%;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     margin: 0 auto 1rem;
-     font-size: 2rem;
- }
+.service-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
 
- .service-card h3 {
-     font-size: 1.5rem;
-     margin-bottom: 1rem;
- }
+.service-icon {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(to bottom, #bdddf3, #fafafa);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.service-icon img {
+    width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    height: 3.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+    flex-shrink: 0;
+    color: #ffffff;
+}
+
+.service-card p {
+    flex-grow: 1;
+    margin: 0;
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+}
 
  /* Portfolio Section */
  .portfolio {
@@ -506,7 +547,7 @@
      background: linear-gradient(90deg, transparent, #6366f1, #a855f7, transparent);
  }
 
- .section-title {
+ .portfolio .section-title {
      font-size: 3.5rem;
      font-weight: 300;
      text-align: center;
@@ -517,7 +558,7 @@
 
  .section-subtitle {
      text-align: center;
-     color: #888888;
+     color: #b0b0b0;
      font-size: 1.1rem;
      font-weight: 300;
      margin-bottom: 4rem;
@@ -615,7 +656,7 @@
  }
 
  .portfolio-content p {
-     color: #cccccc;
+     color: #e0e0e0;
      line-height: 1.6;
      font-size: 0.95rem;
      font-weight: 400;
@@ -634,7 +675,7 @@
      padding: 0.3rem 0.8rem;
      border-radius: 20px;
      font-size: 0.8rem;
-     color: #aaaaaa;
+     color: #d0d0d0;
      transition: all 0.3s ease;
  }
 
@@ -684,6 +725,10 @@
      top: 0;
      left: 0;
      background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+ }
+
+ .pricing .section-title {
+     color: #ffffff;
  }
 
  .pricing-grid {
@@ -753,7 +798,7 @@
  }
 
  .plan-description {
-     color: #aaa;
+     color: #d0d0d0;
      font-size: 1rem;
      margin-bottom: 2rem;
      line-height: 1.5;
@@ -802,7 +847,7 @@
      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
      display: flex;
      align-items: center;
-     color: #ddd;
+     color: #f0f0f0;
      font-size: 0.95rem;
  }
 
@@ -818,7 +863,7 @@
  }
 
  .feature-unavailable {
-     color: #555;
+     color: #707070;
  }
 
  .feature-unavailable .feature-icon {
@@ -830,7 +875,7 @@
      padding: 15px 0;
      border: 2px solid #00d4ff;
      background: transparent;
-     color: #00d4ff;
+     color: #ffffff;
      border-radius: 12px;
      font-size: 1.1rem;
      font-weight: bold;
@@ -843,7 +888,7 @@
 
  .plan-button:hover {
      background: #00d4ff;
-     color: white;
+     color: #ffffff;
      transform: translateY(-2px);
      box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
  }
@@ -870,7 +915,7 @@
      text-align: center;
      font-size: 2rem;
      margin-bottom: 2rem;
-     color: #00d4ff;
+     color: #ffffff;
  }
 
  .faq-item {
@@ -888,6 +933,7 @@
      justify-content: space-between;
      align-items: center;
      transition: all 0.3s ease;
+     color: #ffffff;
  }
 
  .faq-question:hover {
@@ -899,7 +945,7 @@
      max-height: 0;
      overflow: hidden;
      transition: all 0.3s ease;
-     color: #aaa;
+     color: #d0d0d0;
  }
 
  .faq-item.active .faq-answer {
@@ -934,6 +980,13 @@
      background: linear-gradient(90deg, transparent, #00d4ff, #0099cc, #00ff88, transparent);
  }
 
+ .contact .section-title {
+     text-align: center;
+     font-size: 3rem;
+     margin-bottom: 3rem;
+     color: #ffffff;
+ }
+
  .contact-content {
      display: grid;
      grid-template-columns: 1fr 1fr;
@@ -941,17 +994,10 @@
      margin-top: 3rem;
  }
 
- .section-title {
-     text-align: center;
-     font-size: 3rem;
-     margin-bottom: 3rem;
-     color: #ffffff;
- }
-
  .contact-info h3 {
      font-size: 1.5rem;
      margin-bottom: 1rem;
-     color: #00d4ff;
+     color: #ffffff;
  }
 
  .contact-info p {
@@ -993,7 +1039,6 @@
      backdrop-filter: blur(15px);
      overflow: hidden;
      cursor: pointer;
-     group: true;
  }
 
  .action-btn::before {
@@ -1082,7 +1127,7 @@
 
  .btn-subtitle {
      font-size: 0.9rem;
-     color: #888888;
+     color: #c0c0c0;
      font-weight: 300;
      line-height: 1.4;
      transition: color 0.3s ease;
@@ -1093,7 +1138,7 @@
  }
 
  .action-btn:hover .btn-subtitle {
-     color: #aaaaaa;
+     color: #e0e0e0;
  }
 
  .btn-icon {
@@ -1185,7 +1230,7 @@
      background: rgba(255, 255, 255, 0.03);
      border-radius: 8px;
      text-decoration: none;
-     color: #ccc;
+     color: #e0e0e0;
      font-size: 0.9rem;
      transition: all 0.3s ease;
  }
@@ -1263,5 +1308,104 @@
 
      50% {
          transform: translateY(-20px);
+     }
+ }
+
+
+
+
+ /* ACCESSIBILITY IMPROVEMENTS */
+ @media (prefers-reduced-motion: reduce) {
+     * {
+         animation-duration: 0.01ms !important;
+         animation-iteration-count: 1 !important;
+         transition-duration: 0.01ms !important;
+     }
+
+     .hero::before {
+         animation: none;
+     }
+
+     .particle {
+         animation: none;
+     }
+
+     .tech-icon {
+         animation: none;
+     }
+
+     .hero-avatar {
+         animation: none;
+     }
+ }
+
+ /* HIGH CONTRAST MODE SUPPORT */
+ @media (prefers-contrast: high) {
+     .hero h1,
+     .section-title,
+     .service-card h3,
+     .portfolio-content h3,
+     .contact-info h3 {
+         color: #000000 !important;
+         background: #ffffff;
+         padding: 0.2rem 0.5rem;
+         border-radius: 4px;
+     }
+
+     .hero {
+         background: #ffffff !important;
+     }
+
+     .services,
+     .portfolio,
+     .pricing,
+     .contact {
+         background: #000000 !important;
+         color: #ffffff !important;
+     }
+
+     .about,
+     .seo-content {
+         background: #ffffff !important;
+         color: #000000 !important;
+     }
+ }
+
+ /* FOCUS INDICATORS FOR ACCESSIBILITY */
+ a:focus,
+ button:focus,
+ .timeline-step:focus,
+ .faq-question:focus {
+     outline: 2px solid #00d4ff;
+     outline-offset: 2px;
+ }
+
+ /* PRINT STYLES */
+ @media print {
+     .navbar,
+     .timeline-progress,
+     .scroll-progress,
+     .particles,
+     .hero::before {
+         display: none !important;
+     }
+
+     body {
+         color: #000000 !important;
+         background: #ffffff !important;
+     }
+
+     .hero,
+     .services,
+     .portfolio,
+     .pricing,
+     .contact {
+         background: #ffffff !important;
+         color: #000000 !important;
+     }
+
+     .section-title,
+     .hero h1 {
+         color: #000000 !important;
      }
  }
