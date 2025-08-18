@@ -112,22 +112,16 @@ Saludos cordiales.`);
     handleWhatsAppClick(e) {
         e.preventDefault();
         
-        const phoneNumber = '528119765432';
-        const message = encodeURIComponent(`¡Hola! 👋 
+        const phoneNumber = '8119757262';
+        const message = encodeURIComponent(`¡Hola!
 
 Estoy interesado en sus servicios de desarrollo web.
 
-Me gustaría solicitar información sobre:
+Me gustaría solicitar información sobre.
 
-🔸 *Tipo de proyecto:* [Sitio web / Tienda online / Sistema web]
-🔸 *Mi empresa:* 
-🔸 *Objetivo:* 
-🔸 *Presupuesto estimado:* 
-🔸 *Timeline:* 
+¿Podrían ayudarme con una cotización?
 
-¿Podrían ayudarme con una cotización gratuita?
-
-¡Gracias! 🚀`);
+¡Gracias! `);
 
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     }
@@ -307,9 +301,6 @@ Me gustaría solicitar información sobre:
             observer.observe(el);
         });
         
-        // Typing effect for hero subtitle
-        this.setupTypingEffect();
-        
         // Page load animation
         this.setupPageLoadAnimation();
     }
@@ -330,28 +321,7 @@ Me gustaría solicitar información sobre:
         faders.forEach(el => observer.observe(el));
     }
     
-    setupTypingEffect() {
-        const subtitle = document.querySelector('.hero-subtitle');
-        if (subtitle) {
-            const originalText = subtitle.textContent;
-            this.typeWriter(subtitle, originalText, 80);
-        }
-    }
-    
-    typeWriter(element, text, delay = 100) {
-        let i = 0;
-        element.textContent = '';
-        
-        const type = () => {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, delay);
-            }
-        };
-        
-        setTimeout(type, 1000);
-    }
+   
     
     setupPageLoadAnimation() {
         window.addEventListener('load', () => {

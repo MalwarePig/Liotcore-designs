@@ -1,0 +1,72 @@
+Animaciones de Texto con GSAP (Gratis)
+1. Fade In / Fade Out
+El texto aparece o desaparece suavemente con opacidad y movimiento.
+Código:
+gsap.from(".text", {
+opacity: 0,
+duration: 1,
+y: 20
+});
+2. Typing Effect (Máquina de escribir)
+Simula que el texto se escribe letra por letra, como una máquina de escribir.
+Código:
+<h1 class="typing">Hola Mundo</h1>
+<style>
+  .typing {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid;
+    width: 0;
+  }
+</style>
+<script>
+  gsap.to(".typing", {
+    duration: 3,
+    width: "10ch",
+    ease: "steps(10)"
+  });
+</script>
+
+3. Scale / Zoom
+El texto aparece desde pequeño hasta su tamaño real con un efecto de zoom.
+Código:
+gsap.from(".text", {
+scale: 0,
+duration: 1,
+ease: "back.out(1.7)"
+});
+
+4. Color Shift
+El texto cambia de color de manera infinita con efecto de ida y vuelta.
+Código:
+gsap.to(".text", {
+color: "#ff0000",
+duration: 2,
+repeat: -1,
+yoyo: true
+});
+5. Wave Effect (Oleada)
+Cada letra aparece una tras otra con rebote, simulando una ola.
+Código:
+<h1 class="wave">
+  <span>H</span><span>o</span><span>l</span><span>a</span>
+</h1>
+
+<script>
+  gsap.from(".wave span", {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.1,
+    ease: "bounce.out"
+  });
+</script>
+6. Loop infinito (Marquee moderno)
+El texto se desplaza de derecha a izquierda de manera continua.
+Código:
+gsap.to(".text", {
+xPercent: -100,
+repeat: -1,
+duration: 5,
+ease: "linear"
+});
