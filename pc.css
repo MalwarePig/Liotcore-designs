@@ -953,6 +953,10 @@ body {
     box-shadow: 0 25px 70px rgba(0, 212, 255, 0.3);
 }
 
+.newPlan-text{
+    margin-top: 50px;
+}
+
 .plan-name {
     font-size: 1.8rem;
     font-weight: bold;
