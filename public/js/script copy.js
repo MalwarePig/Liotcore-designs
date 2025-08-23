@@ -148,7 +148,7 @@ Información adicional o comentarios:
 
 Saludos cordiales.`);
 
-        window.open(`mailto:ventas@liotcoredesigns.com?subject=${subject}&body=${body}`, '_blank');
+        window.open(`mailto:osvaldodev92@gmail.com?subject=${subject}&body=${body}`, '_blank');
     }
     
     handleWhatsAppClick(e) {
@@ -159,7 +159,7 @@ Saludos cordiales.`);
 
 Estoy interesado en sus servicios de desarrollo web.
 
-Me gustaría solicitar información sobre.
+Me gustaría solicitar información.
 
 ¿Podrían ayudarme con una cotización?
 

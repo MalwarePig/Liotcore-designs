@@ -1,5 +1,7 @@
 // ========================================
-// OPTIMIZED MAIN APPLICATION - LIOTCORE DESIGNS
+// LIOTCORE DESIGNS - APLICACIÓN OPTIMIZADA
+// Funciona en cualquier hosting estático (Render, Netlify, etc.)
+// No usa variables de entorno ni depende de Node.js
 // ========================================
 
 class LiotCoreApp {
@@ -10,22 +12,19 @@ class LiotCoreApp {
         this.navMenu = null;
         this.isInitialized = false;
 
-        // Logo Marquee configuration
+        // Configuración del marquee de logos
         this.logosPath = '../public/img/clients/';
-        this.supportedFormats = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
-        
-        // Lista REAL de logos que existen (¡ajústala según tus archivos!)
         this.existingLogos = [
-            '1.webp', '2.webp', '3.webp', '4.webp', 
-            '5.webp', '6.webp', '7.webp', '8.webp', 
+            '1.webp', '2.webp', '3.webp', '4.webp',
+            '5.webp', '6.webp', '7.webp', '8.webp',
             '9.webp', '10.webp'
         ];
 
-        // Bind methods
+        // Bind de métodos
         this.handleScroll = this.handleScroll.bind(this);
         this.handleResize = this.handleResize.bind(this);
-        
-        // Initialize
+
+        // Inicialización diferida
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
         } else {
@@ -42,7 +41,7 @@ class LiotCoreApp {
             this.setupNavigation();
             this.setupScrollEffects();
 
-            // Diferir todo lo no esencial hasta después de carga
+            // Diferir funcionalidades no críticas hasta después de carga
             window.addEventListener('load', () => {
                 this.setupAnimations();
                 this.setupFadeInAnimations();
@@ -54,10 +53,8 @@ class LiotCoreApp {
 
             this.isInitialized = true;
         } catch (error) {
-            // Solo muestra errores en desarrollo
-            if (process.env.NODE_ENV === 'development') {
-                console.error('Error initializing app:', error);
-            }
+            // Solo descomenta la siguiente línea si necesitas depurar
+            // console.error('Error al inicializar la app:', error);
         }
     }
 
@@ -70,15 +67,12 @@ class LiotCoreApp {
     }
 
     // ========================================
-    // LOGO MARQUEE - SIN VERIFICACIÓN HTTP
+    // LOGO MARQUEE (sin verificación HTTP)
     // ========================================
     setupLogoMarquee() {
         const marqueeContainer = document.querySelector('.marquee-container');
         if (marqueeContainer) {
-            this.logoMarquee = new LogoMarquee(
-                this.logosPath,
-                this.existingLogos // Lista predefinida
-            );
+            this.logoMarquee = new LogoMarquee(this.logosPath, this.existingLogos);
         }
     }
 
@@ -96,7 +90,7 @@ class LiotCoreApp {
     }
 
     // ========================================
-    // CONTACT BUTTONS
+    // BOTONES DE CONTACTO
     // ========================================
     setupContactButtons() {
         const emailBtn = document.getElementById('emailBtn');
@@ -117,8 +111,6 @@ class LiotCoreApp {
         const body = encodeURIComponent(`Hola equipo de LiotCore Designs,
 
 Estoy interesado en sus servicios de desarrollo web y me gustaría solicitar una cotización gratuita.
-
-Por favor, proporcionen información sobre:
 
 INFORMACIÓN DE MI PROYECTO:
 • Tipo de proyecto: [Sitio web corporativo / Tienda online / Sistema web / Otro]
@@ -150,7 +142,7 @@ Información adicional o comentarios:
 
 Saludos cordiales.`);
 
-        window.open(`mailto:ventas@liotcoredesigns.com?subject=${subject}&body=${body}`, '_blank');
+        window.open(`mailto:osvaldodev92@gmail.com?subject=${subject}&body=${body}`, '_blank');
     }
 
     handleWhatsAppClick(e) {
@@ -158,9 +150,9 @@ Saludos cordiales.`);
         const phoneNumber = '8119757262';
         const message = encodeURIComponent(`¡Hola!
 
-Estoy interesado en sus servicios de desarrollo web.
+Estoy interesado en nuestros servicios de desarrollo web.
 
-Me gustaría solicitar información sobre.
+Me gustaría solicitar información.
 
 ¿Podrían ayudarme con una cotización?
 
@@ -170,7 +162,7 @@ Me gustaría solicitar información sobre.
     }
 
     // ========================================
-    // NAVIGATION
+    // NAVEGACIÓN
     // ========================================
     setupNavigation() {
         if (this.hamburger && this.navMenu) {
@@ -209,7 +201,7 @@ Me gustaría solicitar información sobre.
     }
 
     // ========================================
-    // SCROLL EFFECTS (Mantenido temprano)
+    // EFECTOS DE SCROLL
     // ========================================
     setupScrollEffects() {
         let ticking = false;
@@ -277,7 +269,7 @@ Me gustaría solicitar información sobre.
     }
 
     // ========================================
-    // ANIMATIONS & INTERACTIVITY (diferidas)
+    // ANIMACIONES Y INTERACCIÓN (diferidas)
     // ========================================
     setupAnimations() {
         const observer = new IntersectionObserver((entries) => {
@@ -376,7 +368,7 @@ Me gustaría solicitar información sobre.
     }
 
     // ========================================
-    // PARTICLES (diferidas y optimizadas)
+    // PARTÍCULAS (diferidas y ligeras)
     // ========================================
     setupParticles() {
         if (!this.particlesContainer) return;
@@ -402,22 +394,20 @@ Me gustaría solicitar información sobre.
     }
 
     // ========================================
-    // PERFORMANCE & UTILS
+    // MONITOREO DE RENDIMIENTO
     // ========================================
     setupPerformanceMonitoring() {
-        if (window.performance) {
+        if ('performance' in window) {
             window.addEventListener('load', () => {
                 const loadTime = performance.now();
-                if (process.env.NODE_ENV === 'development') {
-                    console.log(`Page loaded in ${Math.round(loadTime)}ms`);
-                }
+                // Descomenta solo para pruebas: console.log(`Página cargada en ${Math.round(loadTime)}ms`);
             });
         }
     }
 }
 
 // ========================================
-// LOGO MARQUEE OPTIMIZADO
+// CLASE: LOGO MARQUEE (OPTIMIZADA)
 // ========================================
 class LogoMarquee {
     constructor(logosPath, logoList) {
@@ -427,7 +417,7 @@ class LogoMarquee {
         this.init();
     }
 
-    async init() {
+    init() {
         if (!this.marqueeContent) return;
 
         if (this.logos.length > 0) {
@@ -453,7 +443,6 @@ class LogoMarquee {
             fragment.appendChild(item);
         });
 
-        // Repetir 3 veces para efecto continuo
         for (let i = 0; i < 3; i++) {
             this.marqueeContent.appendChild(fragment.cloneNode(true));
         }
@@ -463,11 +452,7 @@ class LogoMarquee {
     }
 
     showNoImagesMessage() {
-        this.marqueeContent.innerHTML = `
-            <div class="no-images">
-                <p>No se encontraron logos. Verifica la configuración.</p>
-            </div>
-        `;
+        this.marqueeContent.innerHTML = '<div class="no-images"><p>No se encontraron logos. Verifica la configuración.</p></div>';
     }
 
     addLogo(name) {
@@ -487,6 +472,8 @@ class LogoMarquee {
     }
 }
 
-// Inicializar
+// Inicializar aplicación
 const liotCoreApp = new LiotCoreApp();
-window.liotCoreApp = process.env.NODE_ENV === 'development' ? liotCoreApp : undefined;
+
+// Opcional: expón solo en desarrollo (descomenta si necesitas depurar)
+// window.liotCoreApp = liotCoreApp;
