@@ -1,56 +1,66 @@
 // ========================================
-// MAIN APPLICATION - LIOTCORE DESIGNS
+// OPTIMIZED MAIN APPLICATION - LIOTCORE DESIGNS
 // ========================================
 
 class LiotCoreApp {
-    
     constructor() {
         this.scrollProgress = null;
         this.navbar = null;
         this.hamburger = null;
         this.navMenu = null;
         this.isInitialized = false;
-        
-        // Logo Marquee properties
-        this.logoMarquee = null;
-        this.logosPath = '../public/img/clients/'; // <<-- CAMBIO AQUÍ
+
+        // Logo Marquee configuration
+        this.logosPath = '../public/img/clients/';
         this.supportedFormats = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
         
+        // Lista REAL de logos que existen (¡ajústala según tus archivos!)
+        this.existingLogos = [
+            '1.webp', '2.webp', '3.webp', '4.webp', 
+            '5.webp', '6.webp', '7.webp', '8.webp', 
+            '9.webp', '10.webp'
+        ];
+
         // Bind methods
         this.handleScroll = this.handleScroll.bind(this);
         this.handleResize = this.handleResize.bind(this);
         
-        // Initialize when DOM is ready
+        // Initialize
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
         } else {
             this.init();
         }
     }
-    
+
     init() {
         if (this.isInitialized) return;
-        
+
         try {
             this.cacheElements();
             this.setupContactButtons();
             this.setupNavigation();
             this.setupScrollEffects();
-            this.setupAnimations();
-            this.setupInteractiveElements();
-            this.setupParticles();
-            this.setupScrollToTop();
-            this.setupPerformanceMonitoring();
-            this.setupFadeInAnimations();
-            this.setupLogoMarquee(); // <<--- NUEVO
+
+            // Diferir todo lo no esencial hasta después de carga
+            window.addEventListener('load', () => {
+                this.setupAnimations();
+                this.setupFadeInAnimations();
+                this.setupInteractiveElements();
+                this.setupParticles();
+                this.setupLogoMarquee();
+                this.setupPerformanceMonitoring();
+            });
 
             this.isInitialized = true;
-            console.log('LiotCore App initialized successfully');
         } catch (error) {
-            console.error('Error initializing app:', error);
+            // Solo muestra errores en desarrollo
+            if (process.env.NODE_ENV === 'development') {
+                console.error('Error initializing app:', error);
+            }
         }
     }
-    
+
     cacheElements() {
         this.scrollProgress = document.getElementById('scrollProgress');
         this.navbar = document.getElementById('navbar');
@@ -58,59 +68,51 @@ class LiotCoreApp {
         this.navMenu = document.getElementById('nav-menu');
         this.particlesContainer = document.getElementById('particles');
     }
-    
+
     // ========================================
-    // LOGO MARQUEE FUNCTIONALITY
+    // LOGO MARQUEE - SIN VERIFICACIÓN HTTP
     // ========================================
-    
     setupLogoMarquee() {
         const marqueeContainer = document.querySelector('.marquee-container');
         if (marqueeContainer) {
-            this.logoMarquee = new LogoMarquee(this.logosPath, this.supportedFormats);
-            console.log('Logo Marquee initialized');
+            this.logoMarquee = new LogoMarquee(
+                this.logosPath,
+                this.existingLogos // Lista predefinida
+            );
         }
     }
-    
-    // Métodos públicos para controlar la marquesina
+
     refreshLogos() {
-        if (this.logoMarquee) {
-            this.logoMarquee.refresh();
-        }
+        if (this.logoMarquee) this.logoMarquee.refresh();
     }
-    
+
     addLogo(logoName) {
-        if (this.logoMarquee) {
-            this.logoMarquee.addLogo(logoName);
-        }
+        if (this.logoMarquee) this.logoMarquee.addLogo(logoName);
     }
-    
+
     setLogosPath(newPath) {
         this.logosPath = newPath;
-        if (this.logoMarquee) {
-            this.logoMarquee.setLogosPath(newPath);
-        }
+        if (this.logoMarquee) this.logoMarquee.setLogosPath(newPath);
     }
-    
+
     // ========================================
-    // EXISTING FUNCTIONALITY
+    // CONTACT BUTTONS
     // ========================================
-    
     setupContactButtons() {
         const emailBtn = document.getElementById('emailBtn');
         const whatsappBtn = document.getElementById('whatsappBtn');
-        
+
         if (emailBtn) {
-            emailBtn.addEventListener('click', this.handleEmailClick.bind(this));
+            emailBtn.addEventListener('click', (e) => this.handleEmailClick(e));
         }
-        
+
         if (whatsappBtn) {
-            whatsappBtn.addEventListener('click', this.handleWhatsAppClick.bind(this));
+            whatsappBtn.addEventListener('click', (e) => this.handleWhatsAppClick(e));
         }
     }
-    
+
     handleEmailClick(e) {
         e.preventDefault();
-        
         const subject = encodeURIComponent('Solicitud de Cotización - Desarrollo Web');
         const body = encodeURIComponent(`Hola equipo de LiotCore Designs,
 
@@ -150,10 +152,9 @@ Saludos cordiales.`);
 
         window.open(`mailto:ventas@liotcoredesigns.com?subject=${subject}&body=${body}`, '_blank');
     }
-    
+
     handleWhatsAppClick(e) {
         e.preventDefault();
-        
         const phoneNumber = '8119757262';
         const message = encodeURIComponent(`¡Hola!
 
@@ -167,68 +168,51 @@ Me gustaría solicitar información sobre.
 
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     }
-    
+
+    // ========================================
+    // NAVIGATION
+    // ========================================
     setupNavigation() {
-        // Mobile menu toggle
         if (this.hamburger && this.navMenu) {
             this.hamburger.addEventListener('click', () => {
                 this.navMenu.classList.toggle('active');
             });
         }
-        
-        // Close mobile menu when clicking on links
+
         const navLinks = document.querySelectorAll('.nav-menu a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                if (this.navMenu) {
-                    this.navMenu.classList.remove('active');
-                }
+                if (this.navMenu) this.navMenu.classList.remove('active');
             });
         });
-        
-        // Smooth scrolling for navigation links
+
         const anchorLinks = document.querySelectorAll('a[href^="#"]');
         anchorLinks.forEach(anchor => {
             anchor.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = document.querySelector(anchor.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
-        
-        // Timeline step navigation
+
         const timelineSteps = document.querySelectorAll('.timeline-step');
         timelineSteps.forEach(step => {
             step.addEventListener('click', function() {
                 const targetSection = document.getElementById(this.dataset.section);
                 if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            });
-            
-            // Hover effects for timeline steps
-            step.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.1)';
-            });
-            
-            step.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
             });
         });
     }
-    
+
+    // ========================================
+    // SCROLL EFFECTS (Mantenido temprano)
+    // ========================================
     setupScrollEffects() {
-        // Throttle scroll events for better performance
         let ticking = false;
-        
         window.addEventListener('scroll', () => {
             if (!ticking) {
                 requestAnimationFrame(() => {
@@ -238,96 +222,64 @@ Me gustaría solicitar información sobre.
                 ticking = true;
             }
         });
-        
+
         window.addEventListener('resize', this.handleResize);
-        
-        // Initial call
         this.handleScroll();
     }
-    
+
     handleScroll() {
         const scrollTop = window.pageYOffset;
-        
-        // Update navbar
-        this.updateNavbar(scrollTop);
-        
-        // Update scroll progress
-        this.updateScrollProgress(scrollTop);
-        
-        // Update timeline progress
-        this.updateTimelineProgress(scrollTop);
-        
-        // Parallax effect for hero
-        this.updateParallax(scrollTop);
-    }
-    
-    updateNavbar(scrollTop) {
+
         if (this.navbar) {
-            if (scrollTop > 50) {
-                this.navbar.classList.add('scrolled');
-            } else {
-                this.navbar.classList.remove('scrolled');
-            }
+            this.navbar.classList.toggle('scrolled', scrollTop > 50);
         }
-    }
-    
-    updateScrollProgress(scrollTop) {
+
         if (this.scrollProgress) {
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollProgress = (scrollTop / docHeight) * 100;
-            this.scrollProgress.style.width = scrollProgress + '%';
+            const progress = (scrollTop / docHeight) * 100;
+            this.scrollProgress.style.width = `${progress}%`;
         }
+
+        this.updateTimelineProgress(scrollTop);
+        this.updateParallax(scrollTop);
     }
-    
+
     updateTimelineProgress(scrollTop) {
         const sections = ['home', 'seo-content', 'about', 'services', 'portfolio', 'pricing', 'contact'];
         const steps = document.querySelectorAll('.timeline-step');
         const adjustedScrollTop = scrollTop + 200;
-
         let activeSection = 'home';
-        
-        sections.forEach(sectionId => {
-            const section = document.getElementById(sectionId);
-            if (section && adjustedScrollTop >= section.offsetTop) {
-                activeSection = sectionId;
-            }
+
+        sections.forEach(id => {
+            const section = document.getElementById(id);
+            if (section && adjustedScrollTop >= section.offsetTop) activeSection = id;
         });
 
         steps.forEach(step => {
             const isActive = step.dataset.section === activeSection;
             step.classList.toggle('active', isActive);
-            
-            const stepDot = step.querySelector('.step-dot');
-            if (stepDot) {
-                stepDot.classList.toggle('active', isActive);
-            }
-            
+            const dot = step.querySelector('.step-dot');
             const connector = step.querySelector('.step-connector');
-            if (connector) {
-                connector.classList.toggle('active', isActive);
-            }
+            if (dot) dot.classList.toggle('active', isActive);
+            if (connector) connector.classList.toggle('active', isActive);
         });
     }
-    
+
     updateParallax(scrollTop) {
         const heroContent = document.querySelector('.hero-content');
         if (heroContent) {
             heroContent.style.transform = `translateY(${scrollTop * 0.5}px)`;
         }
     }
-    
+
     handleResize() {
-        // Handle resize events if needed
         this.updateScrollProgress(window.pageYOffset);
     }
-    
-    setupAnimations() {
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
 
+    // ========================================
+    // ANIMATIONS & INTERACTIVITY (diferidas)
+    // ========================================
+    setupAnimations() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -335,26 +287,18 @@ Me gustaría solicitar información sobre.
                     entry.target.style.animationFillMode = 'both';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Observe all animated elements
-        const animatedElements = document.querySelectorAll('[class*="fadeInUp"], [class*="slideIn"]');
-        animatedElements.forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Page load animation
+        document.querySelectorAll('[class*="fadeInUp"], [class*="slideIn"]').forEach(el => observer.observe(el));
         this.setupPageLoadAnimation();
     }
-    
+
     setupFadeInAnimations() {
         const faders = document.querySelectorAll('.fade-in');
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Para que no se repita cuando sales y entras
                     observer.unobserve(entry.target);
                 }
             });
@@ -362,219 +306,130 @@ Me gustaría solicitar información sobre.
 
         faders.forEach(el => observer.observe(el));
     }
-    
+
     setupPageLoadAnimation() {
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease-in-out';
-            
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease-in-out';
+        setTimeout(() => { document.body.style.opacity = '1'; }, 100);
     }
-    
+
     setupInteractiveElements() {
-        // FAQ Toggle functionality
         this.setupFAQs();
-        
-        // Service cards hover effects
         this.setupServiceCards();
-        
-        // Hero avatar animation
         this.setupHeroAvatar();
-        
-        // Portfolio items
         this.setupPortfolioItems();
-        
-        // SEO cards
         this.setupSEOCards();
     }
-    
+
     setupFAQs() {
         const faqQuestions = document.querySelectorAll('.faq-question');
         faqQuestions.forEach(question => {
             question.addEventListener('click', function() {
-                const faqItem = this.parentElement;
-                const isActive = faqItem.classList.contains('active');
-                
-                // Close all FAQ items
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    faqItem.classList.add('active');
+                document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+                if (!this.parentElement.classList.contains('active')) {
+                    this.parentElement.classList.add('active');
                 }
             });
         });
     }
-    
-    setupServiceCards() {
-        const serviceCards = document.querySelectorAll('.service-card');
-        serviceCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) rotateX(5deg)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) rotateX(0deg)';
-            });
-        });
-    }
-    
-    setupHeroAvatar() {
-        const heroAvatar = document.querySelector('.hero-avatar');
-        if (heroAvatar) {
-            heroAvatar.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.1) rotate(5deg)';
-            });
 
-            heroAvatar.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1) rotate(0deg)';
-            });
-        }
+    setupServiceCards() {
+        if (window.innerWidth <= 768) return;
+        const cards = document.querySelectorAll('.service-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-10px) rotateX(5deg)');
+            card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0) rotateX(0deg)');
+        });
     }
-    
+
+    setupHeroAvatar() {
+        const avatar = document.querySelector('.hero-avatar');
+        if (!avatar || window.innerWidth <= 768) return;
+        avatar.addEventListener('mouseenter', () => avatar.style.transform = 'scale(1.1) rotate(5deg)');
+        avatar.addEventListener('mouseleave', () => avatar.style.transform = 'scale(1) rotate(0deg)');
+    }
+
     setupPortfolioItems() {
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
-        portfolioItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                const image = this.querySelector('.portfolio-image');
-                if (image) {
-                    image.style.transform = 'scale(1.1)';
-                }
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                const image = this.querySelector('.portfolio-image');
-                if (image) {
-                    image.style.transform = 'scale(1)';
-                }
-            });
+        if (window.innerWidth <= 768) return;
+        const items = document.querySelectorAll('.portfolio-item');
+        items.forEach(item => {
+            const img = item.querySelector('.portfolio-image');
+            item.addEventListener('mouseenter', () => img && (img.style.transform = 'scale(1.1)'));
+            item.addEventListener('mouseleave', () => img && (img.style.transform = 'scale(1)'));
         });
     }
-    
+
     setupSEOCards() {
-        const seoCards = document.querySelectorAll('.seo-card');
-        seoCards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.2}s`;
-            
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px) rotateX(2deg)';
-                this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.2)';
+        if (window.innerWidth <= 768) return;
+        const cards = document.querySelectorAll('.seo-card');
+        cards.forEach((card, i) => {
+            card.style.animationDelay = `${i * 0.2}s`;
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px) rotateX(2deg)';
+                card.style.boxShadow = '0 25px 50px rgba(0,0,0,0.2)';
             });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) rotateX(0deg)';
-                this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0deg)';
+                card.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
             });
         });
     }
-    
+
+    // ========================================
+    // PARTICLES (diferidas y optimizadas)
+    // ========================================
     setupParticles() {
         if (!this.particlesContainer) return;
-        
-        for (let i = 0; i < 20; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.width = Math.random() * 4 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
-            this.particlesContainer.appendChild(particle);
-        }
-    }
-    
-    setupScrollToTop() {
-        const scrollButton = document.createElement('div');
-        scrollButton.innerHTML = '↑';
-        scrollButton.style.cssText = `
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #00d4ff, #0099cc);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-        `;
-        
-        document.body.appendChild(scrollButton);
-        
-        const handleScrollToTopVisibility = () => {
-            if (window.pageYOffset > 300) {
-                scrollButton.style.opacity = '1';
-                scrollButton.style.transform = 'translateY(0)';
-            } else {
-                scrollButton.style.opacity = '0';
-                scrollButton.style.transform = 'translateY(20px)';
-            }
-        };
-        
-        window.addEventListener('scroll', handleScrollToTopVisibility);
-        
-        scrollButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        scrollButton.addEventListener('mouseenter', () => {
-            scrollButton.style.transform = 'translateY(-3px) scale(1.1)';
-            scrollButton.style.boxShadow = '0 8px 25px rgba(0, 212, 255, 0.4)';
-        });
-        
-        scrollButton.addEventListener('mouseleave', () => {
-            scrollButton.style.transform = 'translateY(0) scale(1)';
-            scrollButton.style.boxShadow = '0 4px 15px rgba(0, 212, 255, 0.3)';
-        });
-    }
-    
-    setupPerformanceMonitoring() {
-        if ('performance' in window) {
-            window.addEventListener('load', () => {
-                const loadTime = performance.now();
-                console.log(`Page loaded in ${Math.round(loadTime)}ms`);
-            });
+
+        const count = window.innerWidth > 768 ? 15 : 5;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.cssText = `
+                position: absolute;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                width: ${Math.random() * 4 + 2}px;
+                height: ${p.style.width};
+                border-radius: 50%;
+                background: #fff;
+                opacity: ${Math.random() * 0.5 + 0.2};
+                animation: float ${Math.random() * 6 + 6}s infinite ease-in-out;
+                animation-delay: ${Math.random() * 6}s;
+            `;
+            this.particlesContainer.appendChild(p);
         }
     }
 
+    // ========================================
+    // PERFORMANCE & UTILS
+    // ========================================
+    setupPerformanceMonitoring() {
+        if (window.performance) {
+            window.addEventListener('load', () => {
+                const loadTime = performance.now();
+                if (process.env.NODE_ENV === 'development') {
+                    console.log(`Page loaded in ${Math.round(loadTime)}ms`);
+                }
+            });
+        }
+    }
 }
 
 // ========================================
-// LOGO MARQUEE CLASS
+// LOGO MARQUEE OPTIMIZADO
 // ========================================
-
 class LogoMarquee {
-    constructor(logosPath = '../img/clients/', supportedFormats = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp']) {
+    constructor(logosPath, logoList) {
         this.logosPath = logosPath;
-        this.supportedFormats = supportedFormats;
+        this.logos = Array.isArray(logoList) ? logoList : [];
         this.marqueeContent = document.getElementById('marqueeContent') || document.querySelector('.marquee-content');
-        this.logos = [];
         this.init();
     }
 
     async init() {
-        if (!this.marqueeContent) {
-            console.warn('Marquee content container not found');
-            return;
-        }
-        
-        await this.loadLogos();
+        if (!this.marqueeContent) return;
+
         if (this.logos.length > 0) {
             this.createMarquee();
         } else {
@@ -582,116 +437,56 @@ class LogoMarquee {
         }
     }
 
-    async loadLogos() {
-        // Lista de nombres de archivo que intentaremos cargar
-        const possibleLogos = [
-            '1.png', '2.png', '3.png', '4.png', '5.png','6.png', '7.png','8.png', '9.png', '10.png'
-        ];
-
-        // Verificar qué imágenes existen realmente
-        for (const logoName of possibleLogos) {
-            try {
-                const exists = await this.imageExists(this.logosPath + logoName);
-                if (exists) {
-                    this.logos.push(logoName);
-                }
-            } catch (error) {
-                // Imagen no existe, continúa con la siguiente
-                continue;
-            }
-        }
-        
-        console.log(`Found ${this.logos.length} logos:`, this.logos);
-    }
-
-    imageExists(src) {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-            img.src = src;
-            // Timeout para evitar que se cuelgue
-            setTimeout(() => resolve(false), 3000);
-        });
-    }
-
     createMarquee() {
-        // Limpiar contenido existente
         this.marqueeContent.innerHTML = '';
 
-        // Crear elementos duplicados para efecto continuo
-        const createLogoSet = () => {
-            const fragment = document.createDocumentFragment();
-            this.logos.forEach(logoName => {
-                const logoItem = document.createElement('div');
-                logoItem.className = 'logo-item';
-                
-                const img = document.createElement('img');
-                img.src = this.logosPath + logoName;
-                img.alt = `Logo ${logoName}`;
-                img.loading = 'lazy';
-                
-                // Error handling para imágenes que no cargan
-                img.onerror = () => {
-                    logoItem.style.display = 'none';
-                };
-                
-                logoItem.appendChild(img);
-                fragment.appendChild(logoItem);
-            });
-            return fragment;
-        };
+        const fragment = document.createDocumentFragment();
+        this.logos.forEach(name => {
+            const item = document.createElement('div');
+            item.className = 'logo-item';
+            const img = document.createElement('img');
+            img.src = this.logosPath + name;
+            img.alt = `Cliente ${name}`;
+            img.loading = 'lazy';
+            img.onerror = () => item.style.display = 'none';
+            item.appendChild(img);
+            fragment.appendChild(item);
+        });
 
-        // Agregar múltiples sets para efecto continuo
-        this.marqueeContent.appendChild(createLogoSet());
-        this.marqueeContent.appendChild(createLogoSet());
-        this.marqueeContent.appendChild(createLogoSet());
+        // Repetir 3 veces para efecto continuo
+        for (let i = 0; i < 3; i++) {
+            this.marqueeContent.appendChild(fragment.cloneNode(true));
+        }
 
-        // Ajustar velocidad de animación basada en cantidad de logos
-        const animationDuration = Math.max(60, this.logos.length * 3);
-        this.marqueeContent.style.animationDuration = `${animationDuration}s`;
-        
-        console.log('Marquee created successfully');
+        const duration = Math.max(60, this.logos.length * 3);
+        this.marqueeContent.style.animationDuration = `${duration}s`;
     }
 
     showNoImagesMessage() {
         this.marqueeContent.innerHTML = `
             <div class="no-images">
-                <p>No se encontraron logos en la carpeta "${this.logosPath}"</p>
-                <p>Asegúrate de que la carpeta existe y contiene archivos de imagen.</p>
-                <p>Formatos soportados: ${this.supportedFormats.join(', ')}</p>
+                <p>No se encontraron logos. Verifica la configuración.</p>
             </div>
         `;
     }
 
-    // Método para agregar logos dinámicamente
-    addLogo(logoName) {
-        if (!this.logos.includes(logoName)) {
-            this.logos.push(logoName);
+    addLogo(name) {
+        if (!this.logos.includes(name)) {
+            this.logos.push(name);
             this.createMarquee();
         }
     }
 
-    // Método para cambiar la ruta de logos
-    setLogosPath(newPath) {
-        this.logosPath = newPath;
-        this.refresh();
+    setLogosPath(path) {
+        this.logosPath = path;
+        this.createMarquee();
     }
 
-    // Método para refrescar los logos
-    async refresh() {
-        this.logos = [];
-        await this.loadLogos();
-        if (this.logos.length > 0) {
-            this.createMarquee();
-        } else {
-            this.showNoImagesMessage();
-        }
+    refresh() {
+        this.createMarquee();
     }
 }
 
-// Initialize the application
+// Inicializar
 const liotCoreApp = new LiotCoreApp();
-
-// Hacer disponible globalmente para debugging/testing
-window.liotCoreApp = liotCoreApp;
+window.liotCoreApp = process.env.NODE_ENV === 'development' ? liotCoreApp : undefined;
