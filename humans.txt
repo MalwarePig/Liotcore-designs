@@ -1,0 +1,13 @@
+# humans.txt - Liotcore Designs
+
+/* TEAM */
+    Founder: Sergio Magaña
+    Location: Monterrey, México
+    Contact: +52 8119757262
+    Email: ventas@liotcoredesigns.com
+
+/* SITE */
+    Language: Spanish
+    Platform: HTML, CSS, JavaScript
+    Software: Diseño y desarrollo web personalizado
+    Do Not Train: OpenAI, Anthropic, Google AI

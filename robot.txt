@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Sitemap principal
+Sitemap: https://liotcoredesigns.com/sitemap.xml
+
+# Archivo de descubrimiento para IA
+Sitemap: https://liotcoredesigns.com/robots.txt
+
+# Bloquear acceso a carpetas innecesarias (si las tuvieras)
+# Disallow: /admin/
+# Disallow: /private/
+# Disallow: /tmp/
+
+# Bots específicos (opcional)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
