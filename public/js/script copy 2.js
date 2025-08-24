@@ -49,7 +49,6 @@ class LiotCoreApp {
                 this.setupParticles();
                 this.setupLogoMarquee();
                 this.setupPerformanceMonitoring();
-                this.setupHorizontalScroll(); // Inicializar scroll horizontal aquí
             });
 
             this.isInitialized = true;
@@ -366,81 +365,6 @@ Me gustaría solicitar información.
                 card.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
             });
         });
-    }
-
-    // ========================================
-    // SCROLL HORIZONTAL - MIGRADO DESDE HTML
-    // ========================================
-    setupHorizontalScroll() {
-        const isMobile = window.innerWidth <= 768;
-        if (isMobile) return;
-
-        const cardsTrack = document.getElementById('cardsTrack');
-        const cards = document.querySelectorAll('.service-card');
-        const scrollSection = document.querySelector('.scroll-section');
-        if (!cardsTrack || !scrollSection || cards.length === 0) return;
-
-        let currentIndex = 0;
-        const cardWidth = 420;
-        const cardGap = 32;
-        const variableX = 85
-
-        const updateTrackWidth = () => {
-            const regularCards = cards.length;
-            const endElementWidth = window.innerWidth;
-            const totalWidth = (regularCards * (cardWidth + cardGap)) + endElementWidth - cardGap;
-            cardsTrack.style.width = `${totalWidth}px`;
-        };
-
-        const handleScroll = () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const sectionTop = scrollSection.offsetTop;
-            const sectionBottom = sectionTop + scrollSection.offsetHeight - window.innerHeight;
-
-            if (scrollTop < sectionTop || scrollTop > sectionBottom) return;
-
-            const progress = (scrollTop - sectionTop) / (sectionBottom - sectionTop);
-            const regularCards = cards.length;
-            const regularCardsWidth = (regularCards * (cardWidth + cardGap)) - cardGap;
-            const endElementWidth = window.innerWidth;
-            const endElementStartPoint = endElementWidth;
-
-            let translateX;
-            if (progress <= 0.85) {
-                const adjustedProgress = progress / 0.85;
-                translateX = -adjustedProgress * endElementStartPoint;
-            } else {
-                translateX = -endElementStartPoint;
-            }
-
-            cardsTrack.style.transform = `translateX(${Math.max(-endElementStartPoint, Math.min(0, translateX))}px)`;
-
-            const newIndex = Math.round((progress / 0.85) * cards.length);
-            if (newIndex !== currentIndex && newIndex >= 0 && newIndex <= cards.length) {
-                currentIndex = newIndex;
-            }
-        };
-
-        let ticking = false;
-        const throttledScroll = () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    handleScroll();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-
-        window.addEventListener('scroll', throttledScroll);
-        window.addEventListener('load', throttledScroll);
-        window.addEventListener('resize', () => {
-            updateTrackWidth();
-            handleScroll();
-        });
-
-        updateTrackWidth();
-        handleScroll();
     }
 
     // ========================================

@@ -89,14 +89,6 @@
         grid-template-columns: 1fr;
     }
 
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .seo-grid {
-        grid-template-columns: 1fr;
-    }
-
     .logo-item {
         margin: 0 20px;
     }
@@ -108,6 +100,102 @@
 
     .marquee-content {
         animation-duration: 60s;
+    }
+
+    .scroll-section {
+        height: auto; /* Quitar la altura fija que causa el scroll vertical */
+        padding: 40px 0;
+        overflow-x: auto; /* Permitir scroll horizontal nativo */
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    }
+
+    .scroll-container {
+        position: relative; /* No sticky en móvil */
+        top: auto;
+        height: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cards-track {
+        width: max-content; /* Ancho dinámico del contenido */
+        padding-left: 20px;
+        padding-right: 20px;
+        gap: 0;
+        /* Mantener el display flex pero quitar el transform */
+    }
+
+    .service-card {
+        min-width: 280px; /* Más pequeño en móvil */
+        width: 280px;
+        height: 450px; /* Altura reducida */
+        margin-right: 16px; /* Menor margen */
+        padding: 24px; /* Padding reducido */
+    }
+
+    .service-card h3 {
+        font-size: 1.4rem; /* Título más pequeño */
+        margin-bottom: 1rem;
+    }
+
+    .service-card p {
+        font-size: 0.95rem; /* Texto más pequeño */
+        margin-bottom: 1.5rem;
+    }
+
+    .features-list li {
+        padding: 0.6rem 0;
+        padding-left: 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .card-number {
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .scroll-end-element {
+        min-width: 300px; /* Ancho fijo más pequeño */
+        width: 300px;
+        height: 450px;
+        margin-right: 20px;
+        border-radius: 16px; /* Esquinas redondeadas */
+    }
+
+    .scroll-end-content {
+        padding: 0 20px;
+        margin-right: 0; /* Centrar el contenido */
+    }
+
+    .scroll-end-content h3 {
+        font-size: 1.8rem; /* Título más pequeño */
+        margin-bottom: 1rem;
+    }
+
+    .scroll-end-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .scroll-end-button {
+        padding: 1rem 2rem;
+        font-size: 0.95rem;
+    }
+
+    /* Indicador de scroll horizontal */
+    .scroll-section::after {
+        content: "← Desliza para ver más →";
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #64748b;
+        font-size: 14px;
+        animation: fadeInOut 2s infinite;
+        pointer-events: none;
     }
 }
 
@@ -140,7 +228,17 @@
     }
 
     .service-card {
-        min-height: 350px;
+        min-width: 300px;
+        height: 500px;
+        padding: 2rem;
+    }
+
+    .scroll-end-content h3 {
+        font-size: 2rem;
+    }
+
+    .scroll-end-content p {
+        font-size: 1rem;
     }
 
     .service-icon {
@@ -170,4 +268,58 @@
     .contact-features {
         grid-template-columns: 1fr;
     }
+
+    
+    .service-card {
+        min-width: 260px;
+        width: 260px;
+        height: 420px;
+        padding: 20px;
+    }
+
+    .service-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .scroll-end-element {
+        min-width: 280px;
+        width: 280px;
+        height: 420px;
+    }
+
+    .scroll-end-content h3 {
+        font-size: 1.6rem;
+    }
 }
+
+
+/* Responsive */
+@media (max-width: 900px) {
+    .solutions-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .solution-card-wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .solutions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .solution-card-wide {
+        grid-column: span 1;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .solution-card-wide .solution-icon {
+        margin-right: 0;
+        margin-bottom: 16px;
+    }
+}
+
+
+

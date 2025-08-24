@@ -94,18 +94,16 @@
             <div class="step-label">Servicios</div>
             <div class="step-connector"></div>
         </div>
-        
-         <div class="timeline-step" data-section="solutions">
-            <div class="step-dot"></div>
-            <div class="step-label">Soluciones</div>
-            <div class="step-connector"></div>
-        </div>
         <div class="timeline-step" data-section="about">
             <div class="step-dot"></div>
             <div class="step-label">Acerca</div>
             <div class="step-connector"></div>
         </div>
-       
+        <div class="timeline-step" data-section="services">
+            <div class="step-dot"></div>
+            <div class="step-label">Soluciones</div>
+            <div class="step-connector"></div>
+        </div>
         <!-- <div class="timeline-step" data-section="portfolio">
             <div class="step-dot"></div>
             <div class="step-label">Portfolio</div>
@@ -142,9 +140,8 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#seo-content">Servicios</a></li>
-                <li><a href="#solutions">Soluciones</a></li>
                 <li><a href="#about">Acerca</a></li>
-                
+                <li><a href="#services">Soluciones</a></li>
                 <!--  <li><a href="#portfolio">Portfolio</a></li> -->
                 <li><a href="#pricing">Precios</a></li>
                 <li><a href="#contact">Contacto</a></li>
@@ -197,7 +194,7 @@
                 <div class="scroll-container">
                     <div class="cards-track" id="cardsTrack">
 
-                        <div class="service-card fade-in">
+                        <div class="service-card">
                             <div class="card-number">01</div>
                             <h3>Desarrollo Web Profesional</h3>
                             <p>Arquitecturas web modernas, escalables y optimizadas que convierten visitantes en
@@ -211,7 +208,7 @@
                             </ul>
                         </div>
 
-                        <div class="service-card fade-in">
+                        <div class="service-card">
                             <div class="card-number">02</div>
                             <h3>E-commerce</h3>
                             <p>Plataformas de comercio electrónico que maximizan conversiones y escalabilidad
@@ -225,7 +222,7 @@
                             </ul>
                         </div>
 
-                        <div class="service-card fade-in">
+                        <div class="service-card">
                             <div class="card-number">03</div>
                             <h3>Diseño Responsivo</h3>
                             <p>Desarrollo responsivo y aplicaciones que garantizan experiencia perfecta en cualquier
@@ -238,7 +235,7 @@
                             </ul>
                         </div>
 
-                        <div class="service-card fade-in">
+                        <div class="service-card">
                             <div class="card-number">04</div>
                             <h3>Diseño UX/UI Profesional</h3>
                             <p>Diseño de interfaces intuitivas y experiencias de usuario memorables que aumentan la
@@ -251,7 +248,7 @@
                             </ul>
                         </div>
 
-                        <div class="service-card fade-in">
+                        <div class="service-card">
                             <div class="card-number">05</div>
                             <h3>SEO & Marketing Digital</h3>
                             <p>Estrategias de crecimiento digital que generan leads calificados y ROI measurable.</p>
@@ -263,7 +260,7 @@
                             </ul>
                         </div>
 
-                        <div class="service-card fade-in">
+                        <div class="service-card">
                             <div class="card-number">06</div>
                             <h3>Mantenimiento y Soporte 24/7</h3>
                             <p>Infraestructura robusta, monitoreo proactivo y soporte técnico especializado 24/7.</p>
@@ -276,12 +273,10 @@
                             </ul>
                         </div>
 
-                     
-
                         <!-- NUEVO: Elemento final del scroll -->
-                        <!-- <div class="scroll-end-element">
+                        <div class="scroll-end-element">
 
-                            <div class="scroll-end-content fade-in">
+                            <div class="scroll-end-content">
                                 <div class="last-card">
                                     <h3>Transformamos ideas en soluciones digitales</h3>
                                     <p>
@@ -303,79 +298,98 @@
                                     fill="none" />
                                 <circle cx="50" cy="50" r="8" fill="currentColor" />
                             </svg>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Solutions Section -->
-    <section id="solutions" class="solutions-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Nuestros Servicios Web</h2>
-                <p>Diseñamos soluciones digitales que funcionan, se ven bien y generan resultados.</p>
-            </div>
+    <script>
+        class HorizontalScroll {
+            constructor() {
+                this.cardsTrack = document.getElementById('cardsTrack');
+                this.cards = document.querySelectorAll('.service-card');
+                this.scrollSection = document.querySelector('.scroll-section');
+                this.currentIndex = 0;
+                this.cardWidth = 420;
+                this.cardGap = 32;
+                this.init();
+            }
 
-            <div class="solutions-grid">
-                <!-- Tarjetas normales -->
-                <div class="solution-card fade-in">
-                    <div class="solution-icon"><img src="./public/img/seo.webp" alt="Páginas Web" loading="lazy"></div>
-                    <h3>Páginas Web Profesionales</h3>
-                    <p>Sitios web responsivos, rápidos y optimizados para SEO. Diseños modernos que reflejan tu marca.
-                    </p>
-                </div>
+            init() {
+                this.setupScrollListener();
+                this.updateTrackWidth();
+            }
 
-                <div class="solution-card fade-in">
-                    <div class="solution-icon"><img src="./public/img/shop.webp" alt="Tiendas Online" loading="lazy">
-                    </div>
-                    <h3>Tiendas Online</h3>
-                    <p>E-commerce listo para vender: carrito, pasarelas de pago, inventario y experiencia de compra
-                        fluida.</p>
-                </div>
+            updateTrackWidth() {
+                // Solo calcular el ancho de las cards regulares para el movimiento
+                // El elemento final se posiciona pero no se incluye en la translación
+                const regularCards = this.cards.length;
+                const endElementWidth = window.innerWidth;
+                const totalWidth = (regularCards * (this.cardWidth + this.cardGap)) + endElementWidth - this.cardGap;
+                this.cardsTrack.style.width = `${totalWidth}px`;
+            }
 
-                <div class="solution-card fade-in">
-                    <div class="solution-icon"><img src="./public/img/ERP.webp" alt="Sistemas Web" loading="lazy"></div>
-                    <h3>Sistemas Web Personalizados</h3>
-                    <p>Automatiza tu negocio con aplicaciones a medida: CRM, ERP, gestión interna y más.</p>
-                </div>
+            setupScrollListener() {
+                let ticking = false;
+                const handleScroll = () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            this.handleScroll();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                };
+                window.addEventListener('scroll', handleScroll);
+                window.addEventListener('load', () => this.handleScroll());
+                window.addEventListener('resize', () => this.updateTrackWidth());
+            }
 
-                <div class="solution-card fade-in">
-                    <div class="solution-icon"><img src="./public/img/dashboard.webp" alt="Dashboards" loading="lazy">
-                    </div>
-                    <h3>Dashboards y Reportes</h3>
-                    <p>Visualiza el rendimiento de tu negocio en tiempo real con paneles claros e intuitivos.</p>
-                </div>
+            handleScroll() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const sectionTop = this.scrollSection.offsetTop;
+                const sectionBottom = sectionTop + this.scrollSection.offsetHeight - window.innerHeight;
 
-                <div class="solution-card fade-in">
-                    <div class="solution-icon"><img src="./public/img/uiux.webp" alt="Diseño UI/UX" loading="lazy">
-                    </div>
-                    <h3>Diseño UI/UX</h3>
-                    <p>Interfaces atractivas y fáciles de usar que aumentan la satisfacción y conversiones.</p>
-                </div>
+                if (scrollTop < sectionTop || scrollTop > sectionBottom) {
+                    return;
+                }
 
-                <div class="solution-card fade-in">
-                    <div class="solution-icon"><img src="./public/img/404.webp" alt="Mantenimiento Web" loading="lazy">
-                    </div>
-                    <h3>Mantenimiento Web</h3>
-                    <p>Actualizaciones, respaldos, optimización de velocidad y soporte continuo.</p>
-                </div>
+                const progress = (scrollTop - sectionTop) / (sectionBottom - sectionTop);
 
-                <!-- Tarjeta grande de cierre (2 columnas) -->
-                <div class="solution-card solution-card-wide  fade-in">
-                    <div class="solution-icon"><img src="./public/img/support.webp" alt="Soporte" loading="lazy"></div>
-                    <div class="solution-content">
-                        <h3>¿Necesitas algo personalizado?</h3>
-                        <p>Hablemos. Creamos soluciones a medida para necesidades únicas.</p>
-                        <button class="btn-outline">Contáctanos</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                // Calcular el ancho total solo de las cards regulares
+                const regularCards = this.cards.length;
+                const regularCardsWidth = (regularCards * (this.cardWidth + this.cardGap)) - this.cardGap;
+                const endElementWidth = window.innerWidth;
 
+                // El punto donde el elemento final debe empezar a aparecer
+                const endElementStartPoint = regularCardsWidth - window.innerWidth + 100;
 
+                let translateX;
+
+                // Si no hemos llegado al punto donde aparece el elemento final
+                if (progress <= 0.85) { // Ajusta este valor según necesites
+                    const adjustedProgress = progress / 0.85;
+                    translateX = -adjustedProgress * endElementStartPoint;
+                } else {
+                    // Una vez que el elemento final aparece, mantenerlo fijo
+                    translateX = -endElementStartPoint;
+                }
+
+                this.cardsTrack.style.transform = `translateX(${Math.max(-endElementStartPoint, Math.min(0, translateX))}px)`;
+
+                const newIndex = Math.round((progress / 0.85) * this.cards.length);
+                if (newIndex !== this.currentIndex && newIndex >= 0 && newIndex <= this.cards.length) {
+                    this.currentIndex = newIndex;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new HorizontalScroll();
+        });
+    </script>
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
@@ -413,7 +427,51 @@
     </section>
 
     <!-- Services Section -->
-
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios Web</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="./public/img/seo.webp" alt="SEO" loading="lazy"></div>
+                    <h3>Páginas Web Profesionales</h3>
+                    <p>Sitios web profesionales, responsivos y optimizados para SEO. Diseños modernos que reflejan la
+                        identidad de tu empresa.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="./public/img/shop.webp" alt="Tienda Online" loading="lazy">
+                    </div>
+                    <h3>Tiendas Online</h3>
+                    <p>E-commerce completo con carrito de compras, pasarelas de pago y gestión de inventarios. Perfecto
+                        para vender en línea.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="./public/img/ERP.webp" alt="Sistemas Web" loading="lazy"></div>
+                    <h3>Sistemas Web</h3>
+                    <p>Aplicaciones web personalizadas para gestionar tu negocio. CRM, ERP, sistemas de inventario y
+                        más.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="./public/img/dashboard.webp" alt="Dashboards" loading="lazy">
+                    </div>
+                    <h3>Dashboards y Reportes</h3>
+                    <p>Paneles de control intuitivos para visualizar datos importantes de tu empresa en tiempo real.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="./public/img/uiux.webp" alt="Diseño UI/UX" loading="lazy"></div>
+                    <h3>Diseño UI/UX</h3>
+                    <p>Interfaces atractivas y fáciles de usar que mejoran la experiencia de tus usuarios y aumentan las
+                        conversiones.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon"><img src="./public/img/404.webp" alt="Mantenimiento Web" loading="lazy">
+                    </div>
+                    <h3>Mantenimiento Web</h3>
+                    <p>Actualizaciones, respaldos, optimización de velocidad y soporte técnico continuo para tu sitio
+                        web.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Portfolio Section -->
     <!-- <section id="portfolio" class="portfolio">
@@ -724,23 +782,23 @@
             </div>
         </div>
     </section>
- 
-<section class="service-areas">
+
+    <section class="service-areas">
         <div class="container">
             <h3>Atendemos en todo México y el mundo</h3>
             <p><strong>Desde Monterrey, Nuevo León</strong>, ofrecemos desarrollo web para empresas y emprendedores en
                 todo México, Estados Unidos y Latinoamérica.</p>
 
             <div class="areas-grid">
-                <div class="area fade-in">
+                <div class="area">
                     <h4>📍 Local</h4>
                     <p>Monterrey, Guadalupe, San Pedro, Apodaca, Escobedo, Santa Catarina</p>
                 </div>
-                <div class="area fade-in">
+                <div class="area">
                     <h4>🇲🇽 Nacional</h4>
                     <p>Ciudad de México, Guadalajara, Puebla, Querétaro, León, Tijuana, Cancún</p>
                 </div>
-                <div class="area fade-in">
+                <div class="area">
                     <h4>🌎 Internacional</h4>
                     <p>Estados Unidos, Colombia, Chile, Perú, Argentina, Centroamérica</p>
                 </div>
@@ -752,81 +810,6 @@
             </p>
         </div>
     </section>
-
-    <style>
-        /* ===== Service Areas Section ===== */
-.service-areas {
-  padding: 4rem 1rem;
-  background: #fafafa;
-  color: #333;
-  font-family: "Inter", "Segoe UI", sans-serif;
-}
-
-.service-areas .container {
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.service-areas h3 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #222;
-}
-
-.service-areas p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 2rem;
-}
-
-.areas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.area {
-  background: #fff;
-  border-radius: 1rem;
-  padding: 2rem 1.5rem;
-  text-align: left;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.area:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-.area h4 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-  color: #ff6b6b; /* tono acento */
-}
-
-.area p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #666;
-}
-
-/* nota inferior */
-.service-areas .container > p:last-of-type {
-  font-size: 0.9rem;
-  color: #888;
-  margin-top: 2.5rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-</style>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
