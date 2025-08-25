@@ -9,5 +9,4 @@
 /* SITE */
     Language: Spanish
     Platform: HTML, CSS, JavaScript
-    Software: Diseño y desarrollo web personalizado
-    Do Not Train: OpenAI, Anthropic, Google AI
+    Software: Diseño y desarrollo web personalizad
