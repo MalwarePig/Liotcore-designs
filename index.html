@@ -1,79 +1,229 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon -->
-    <link rel="icon" href="/Logo.ico" type="image/x-icon">
+    <!-- 1. GOOGLE ANALYTICS 4 - VA AQUÍ AL INICIO DEL HEAD -->
+    <!-- Google Analytics 4 -->
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LSME0E446E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-LSME0E446E');
+    </script>
+
+    <!-- 2. GOOGLE TAG MANAGER - OPCIONAL, TAMBIÉN AL INICIO -->
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Favicon mejorado -->
+    <link rel="icon" href="/Logo.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- SEO Principal -->
     <title>Liotcore Designs | Páginas Web Profesionales en Monterrey | Desde $1,490 MXN</title>
     <meta name="description"
         content="Agencia de desarrollo web en Monterrey. Creamos páginas web desde $1,490 MXN. Incluye diseño, hosting, dominio y SEO. ¡Cotiza gratis!">
-
     <meta name="keywords"
-        content="desarrollo web, páginas web, aplicaciones móviles, e-commerce, diseño web, soluciones digitales, Monterrey, México, SEO, marketing digital">
+        content="desarrollo web monterrey, páginas web monterrey, diseño web nuevo león, aplicaciones móviles, e-commerce, SEO monterrey, marketing digital">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://liotcoredesigns.com/">
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Autor y empresa -->
+    <meta name="author" content="Liotcore Designs">
+    <meta name="publisher" content="Liotcore Designs">
+    <meta name="copyright" content="© 2024 Liotcore Designs">
+
+    <!-- Geolocalización -->
+    <meta name="geo.region" content="MX-NL">
+    <meta name="geo.placename" content="Monterrey, Nuevo León">
+    <meta name="geo.position" content="25.6866136;-100.3161126">
+    <meta name="ICBM" content="25.6866136, -100.3161126">
 
     <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
     <meta property="og:title" content="Liotcore Designs | Páginas Web Profesionales en Monterrey">
     <meta property="og:description"
         content="Diseño y desarrollo de páginas web desde $1,490 MXN. Incluye hosting, dominio y SEO.">
     <meta property="og:image" content="https://liotcoredesigns.com/public/img/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Liotcore Designs - Desarrollo Web en Monterrey">
     <meta property="og:url" content="https://liotcoredesigns.com">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="Liotcore Designs">
 
-    <!-- Twitter Card (para X/Twitter) -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Liotcore Designs | Páginas Web Profesionales en Monterrey">
     <meta name="twitter:description" content="Páginas web modernas desde $1,490 MXN con hosting y dominio incluidos.">
     <meta name="twitter:image" content="https://liotcoredesigns.com/public/img/og-image.png">
+    <meta name="twitter:image:alt" content="Liotcore Designs - Desarrollo Web en Monterrey">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="pc.css">
-    <link rel="stylesheet" href="movil.css">
+    <!-- Verificaciones (agregar cuando tengas las cuentas) -->
+    <!-- <meta name="google-site-verification" content="tu-codigo-aqui"> -->
+    <!-- <meta name="msvalidate.01" content="tu-codigo-bing-aqui"> -->
 
-    <!-- JS -->
-    <script src="./public/js/script.js"></script>
+    <!-- CSS con preload para archivos críticos -->
+    <link rel="preload" href="pc.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="pc.css">
+    </noscript>
+    <link rel="stylesheet" href="movil.css" media="(max-width: 768px)">
 
-    <!-- Schema Markup para SEO -->
+    <!-- Datos estructurados mejorados -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Liotcore Designs",
-      "image": "https://liotcoredesigns.com/public/img/Liotcore.svg",
-      "url": "https://liotcoredesigns.com",
-      "logo": "https://liotcoredesigns.com/public/img/Liotcore.svg",
-      "description": "Agencia de desarrollo web en Monterrey especializada en páginas web profesionales, e-commerce, diseño UX/UI y soluciones digitales personalizadas.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Sin dirección física",
-        "addressLocality": "Monterrey",
-        "addressRegion": "NL",
-        "postalCode": "64000",
-        "addressCountry": "MX"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "25.6866136",
-        "longitude": "-100.3161126"
-      },
-      "telephone": "+528119757262",
-      "openingHours": "Mo-Fr 10:00-19:00",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Ventas",
-        "telephone": "+528119757262",
-        "availableLanguage": "Español"
-      },
-      "sameAs": [
-        "https://facebook.com/liotcore",
-        "https://instagram.com/liotcore"
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://liotcoredesigns.com/#organization",
+          "name": "Liotcore Designs",
+          "alternateName": ["Liotcore", "Liotcore Designs México"],
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://liotcoredesigns.com/public/img/Liotcore.svg",
+            "width": 600,
+            "height": 600
+          },
+          "url": "https://liotcoredesigns.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://liotcoredesigns.com/public/img/Liotcore.svg",
+            "width": 600,
+            "height": 600
+          },
+          "description": "Agencia de desarrollo web en Monterrey especializada en páginas web profesionales, e-commerce, diseño UX/UI y soluciones digitales personalizadas.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Servicio a domicilio en área metropolitana",
+            "addressLocality": "Monterrey",
+            "addressRegion": "Nuevo León",
+            "postalCode": "64000",
+            "addressCountry": "México"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "25.6866136",
+            "longitude": "-100.3161126"
+          },
+          "telephone": "+528119757262",
+          "priceRange": "$$",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "10:00",
+              "closes": "19:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Saturday", "Sunday"],
+              "opens": "10:00",
+              "closes": "14:00"
+            }
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Ventas y soporte técnico",
+            "telephone": "+528119757262",
+            "availableLanguage": ["Español", "English"],
+            "areaServed": ["Monterrey", "Guadalupe", "San Nicolás", "San Pedro", "Apodaca", "México"]
+          },
+          "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": "25.6866136",
+              "longitude": "-100.3161126"
+            },
+            "geoRadius": "50000"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Desarrollo Web",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Desarrollo de Páginas Web",
+                  "description": "Diseño y desarrollo de sitios web profesionales"
+                }
+              },
+              {
+                "@type": "Offer", 
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Tiendas en Línea (E-commerce)",
+                  "description": "Desarrollo de tiendas virtuales con sistemas de pago"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "SEO y Marketing Digital",
+                  "description": "Optimización para buscadores y estrategias digitales"
+                }
+              }
+            ]
+          },
+          "sameAs": [
+            "https://www.facebook.com/profile.php?id=61579165067886",
+            "https://www.instagram.com/liotcoredesigns/",
+            "https://wa.me/528119757262"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://liotcoredesigns.com/#website",
+          "url": "https://liotcoredesigns.com",
+          "name": "Liotcore Designs",
+          "description": "Desarrollo web profesional en Monterrey",
+          "publisher": {
+            "@id": "https://liotcoredesigns.com/#organization"
+          },
+          "inLanguage": "es-MX",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://liotcoredesigns.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
       ]
     }
     </script>
+
+    <!-- JS con defer para mejor performance -->
+    <script src="./public/js/script.js" defer></script>
 </head>
 
 <body>
@@ -148,6 +298,7 @@
                 <!--  <li><a href="#portfolio">Portfolio</a></li> -->
                 <li><a href="#pricing">Precios</a></li>
                 <li><a href="#contact">Contacto</a></li>
+                <li><a href="./visitas/">Visitas</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
