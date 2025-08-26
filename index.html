@@ -270,7 +270,7 @@
             <div class="step-dot"></div>
             <div class="step-label">Contacto</div>
         </div>
-        
+
     </div>
 
     <!-- Navbar -->
@@ -579,6 +579,153 @@
             </div>
         </div>
     </section>
+
+    <section class="sabias-que">
+  <div class="container">
+    <h2 class="titulo-seccion">¿Sabías que...?</h2>
+
+    <div class="acordeon">
+
+      <div class="acordeon-item">
+        <button class="acordeon-titulo">
+          <span>Un <strong>dominio</strong> es la dirección de tu sitio web</span>
+          <span class="icono">▼</span>
+        </button>
+        <div class="acordeon-contenido">
+          <p>Es el nombre único que escriben tus visitantes para encontrarte en internet, como <em>liotcoredesigns.com</em>.</p>
+        </div>
+      </div>
+
+      <div class="acordeon-item">
+        <button class="acordeon-titulo">
+          <span>El <strong>hosting</strong> es donde vive tu web</span>
+          <span class="icono">▼</span>
+        </button>
+        <div class="acordeon-contenido">
+          <p>Es el espacio en servidores conectados a internet donde se almacena tu página, para que siempre esté disponible.</p>
+        </div>
+      </div>
+
+      <div class="acordeon-item">
+        <button class="acordeon-titulo">
+          <span>El <strong>certificado SSL</strong> protege a tus visitantes</span>
+          <span class="icono">▼</span>
+        </button>
+        <div class="acordeon-contenido">
+          <p>El candado verde y el <em>https://</em> garantizan seguridad, confianza y mejoran tu SEO.</p>
+        </div>
+      </div>
+
+      <div class="acordeon-item">
+        <button class="acordeon-titulo">
+          <span>El <strong>SEO técnico</strong> impulsa tu visibilidad</span>
+          <span class="icono">▼</span>
+        </button>
+        <div class="acordeon-contenido">
+          <p>Optimizar velocidad, seguridad y palabras clave ayuda a que tu sitio aparezca en los primeros resultados de Google.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+    <style>
+      .sabias-que {
+  background: #f9f9f9;
+  padding: 60px 20px;
+}
+
+.titulo-seccion {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #222;
+  font-weight: 700;
+}
+
+.acordeon {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.acordeon-item {
+  margin-bottom: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.acordeon-titulo {
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: none;
+  padding: 18px 22px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.acordeon-titulo:hover {
+  background: #f1f1f1;
+}
+
+.acordeon-titulo .icono {
+  transition: transform 0.3s ease;
+  font-size: 1rem;
+  color: #444;
+}
+
+.acordeon-contenido {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 22px;
+}
+
+.acordeon-contenido p {
+  color: #555;
+  line-height: 1.6;
+  margin: 16px 0;
+}
+
+/* Estado activo */
+.acordeon-item.activo .acordeon-contenido {
+  max-height: 500px;
+  padding: 0 22px 18px;
+}
+
+.acordeon-item.activo .icono {
+  transform: rotate(180deg);
+}
+
+
+    </style>
+<script>
+  document.querySelectorAll(".acordeon-titulo").forEach(boton => {
+    boton.addEventListener("click", () => {
+      const item = boton.parentElement;
+      item.classList.toggle("activo");
+
+      // Cierra los demás
+      document.querySelectorAll(".acordeon-item").forEach(el => {
+        if (el !== item) el.classList.remove("activo");
+      });
+    });
+  });
+</script>
+
 
 
     <!-- About Section -->
