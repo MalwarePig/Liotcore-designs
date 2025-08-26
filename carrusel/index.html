@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generador de Carruseles Instagram Gratis | Liotcore Designs</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../Logo.ico">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <meta name="description" content="Herramienta gratuita para crear carruseles de Instagram perfectos. Genera lienzos en blanco o divide imágenes en múltiples slides de 1080x1350. Por Liotcore Designs.">
+  <meta name="keywords" content="carrusel instagram, generador carrusel, herramientas diseño gratis, liotcore designs, crear slides instagram">
+  <link rel="canonical" href="https://liotcoredesigns.com/carrusel">
+  <meta property="og:title" content="Generador Gratuito de Carruseles Instagram - Liotcore Designs">
+  <meta property="og:description" content="Crea carruseles perfectos para Instagram. Herramienta gratuita y fácil de usar.">
+  <meta property="og:url" content="https://liotcoredesigns.com/carrusel">
+  <meta property="og:type" content="website">
+  <style>
+    :root{
+      --primary: #1a1a1a;
+      --secondary: #666666;
+      --accent: #00d4ff;
+      --pink: #ff6b6b;
+      --bg: #fafafa;
+      --white: #ffffff;
+      --border: #e8e8e8;
+      --hover: #f5f5f5;
+      --text: #1a1a1a;
+      --text-light: #8a8a8a;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .navbar-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--pink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .navbar-brand::before {
+      content: '←';
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+    
+    .navbar-brand:hover {
+      color: var(--accent);
+      transition: color 0.2s ease;
+    }
+    
+    .navbar-title {
+      font-size: 0.9rem;
+      color: var(--secondary);
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .cta-banner {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      border: 2px solid var(--pink);
+      box-shadow: 
+        0 0 20px rgba(255, 107, 107, 0.3),
+        inset 0 0 20px rgba(0, 212, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--pink), var(--accent), var(--pink), var(--accent));
+      border-radius: 12px;
+      z-index: -1;
+      animation: neonPulse 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes neonPulse {
+      0% { 
+        box-shadow: 0 0 10px var(--pink), 0 0 20px var(--pink), 0 0 30px var(--pink);
+      }
+      100% { 
+        box-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent), 0 0 40px var(--accent);
+      }
+    }
+    
+    .cta-banner h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    .cta-banner p {
+      margin: 0 0 16px;
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    
+    .cta-button {
+      background: var(--white);
+      color: var(--pink);
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      color: var(--pink);
+      border-color: var(--accent);
+      box-shadow: 
+        0 0 15px rgba(0, 212, 255, 0.5),
+        0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cta-button:hover::before {
+      left: 100%;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    
+    .subtitle {
+      font-size: 1rem;
+      color: var(--secondary);
+      font-weight: 400;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 60px;
+    }
+    
+    @media (max-width: 1024px) {
+      .grid {
+        gap: 60px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .container {
+        padding: 20px 16px;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      .navbar-content {
+        padding: 0 16px;
+      }
+    }
+    
+    .section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .section-header {
+      padding: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    
+    .section-description {
+      font-size: 1rem;
+      color: var(--secondary);
+    }
+    
+    .section-content {
+      padding: 32px;
+    }
+    
+    .form-group {
+      margin-bottom: 28px;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    
+    label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    
+    input[type="number"], input[type="file"] {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 1rem;
+      background: var(--white);
+      min-width: 140px;
+      transition: border-color 0.2s ease;
+    }
+    
+    input[type="number"]:focus, input[type="file"]:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    input[type="file"] {
+      min-width: 220px;
+      cursor: pointer;
+    }
+    
+    button {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    
+    button:hover:not(:disabled) {
+      background: var(--pink);
+      transform: translateY(-1px);
+      box-shadow: 
+        0 0 15px rgba(255, 107, 107, 0.4),
+        0 4px 15px rgba(255, 107, 107, 0.2);
+    }
+    
+    button:disabled {
+      background: var(--border);
+      color: var(--text-light);
+      cursor: not-allowed;
+    }
+    
+    .preview-container {
+      margin-top: 32px;
+      padding: 28px;
+      background: var(--hover);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    
+    canvas {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .preview-hint {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      text-align: center;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 28px;
+      padding: 0 10px;
+      background: var(--pink);
+      color: var(--white);
+      border-radius: 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 12px;
+    }
+    
+    .form-row input[type="number"] {
+      max-width: 100px;
+    }
+    
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      background: var(--white);
+    }
+    
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: var(--pink);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    .footer-text {
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+    
+    .footer-text a {
+      color: var(--pink);
+      text-decoration: none;
+    }
+    
+    .social-proof {
+      background: var(--white);
+      padding: 24px;
+      border-radius: 8px;
+      margin-top: 40px;
+      text-align: center;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .social-proof::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--accent), var(--pink));
+      border-radius: 8px 8px 0 0;
+      animation: shimmer 2s ease-in-out infinite;
+    }
+    
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    
+    .social-proof h4 {
+      color: var(--primary);
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+    }
+    
+    .social-proof p {
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+    
+    .social-proof a {
+      color: var(--pink);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    button:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    
+    input:disabled {
+      background: var(--hover);
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <a href="https://liotcoredesigns.com" class="navbar-brand">
+        Liotcore Designs
+      </a>
+      <span class="navbar-title">Herramientas de Diseño</span>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+      <h3>🎨 ¿Te gusta esta herramienta gratuita?</h3>
+      <p>Descubre más recursos y servicios de diseño profesional</p>
+      <a href="https://liotcoredesigns.com" class="cta-button">Ver todos nuestros servicios</a>
+    </div>
+
+    <header>
+      <h1>Carruseles de Instagram</h1>
+      <p class="subtitle">Genera lienzos en blanco o corta imágenes en diapositivas perfectas</p>
+    </header>
+
+    <div class="grid">
+      <!-- SECCIÓN 1: Generar lienzo -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            Generar lienzo
+            <span id="badgeGen" class="badge">3</span>
+          </h2>
+          <p class="section-description">Crea un lienzo en blanco con guías para diseñar</p>
+        </div>
+        
+        <div class="section-content">
+          <div class="form-group">
+            <div class="form-row">
+              <div>
+                <label for="slidesGen">Diapositivas</label>
+                <input type="number" id="slidesGen" min="1" max="7" value="3" />
+              </div>
+              <button id="btnDownload">Generar y descargar</button>
+            </div>
+          </div>
+          
+          <div class="preview-container">
+            <canvas id="previewGen"></canvas>
+            <div class="preview-hint">Vista previa • Descarga en tamaño real 1080×1350 por diapositiva</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: Cortar imagen -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            Cortar imagen
+            <span id="badgeCut" class="badge">—</span>
+          </h2>
+          <p class="section-description">Divide una imagen horizontal en múltiples diapositivas</p>
+        </div>
+        
+        <div class="section-content">
+          <div class="form-group">
+            <label for="upload">Imagen horizontal</label>
+            <input type="file" id="upload" accept="image/*" />
+          </div>
+          
+          <div class="form-group">
+            <div class="form-row">
+              <div>
+                <label for="slidesCut">Diapositivas</label>
+                <input type="number" id="slidesCut" min="1" max="7" value="3" disabled />
+              </div>
+              <button id="btnCut" disabled>Cortar y descargar</button>
+            </div>
+          </div>
+          
+          <div class="preview-container">
+            <canvas id="previewCut"></canvas>
+            <div class="preview-hint">Vista previa • Cada corte se descarga en 1080×1350</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Social Proof Section -->
+    <div class="social-proof">
+      <h4>✨ Herramienta desarrollada por Liotcore Designs</h4>
+      <p>Especialistas en diseño web, branding y soluciones digitales</p>
+      <a href="https://liotcoredesigns.com">Conoce nuestro portafolio completo</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://liotcoredesigns.com/#contacto">Contacto</a>
+      </div>
+      <p class="footer-text">
+        © 2025 <a href="https://liotcoredesigns.com">Liotcore Designs</a> - Diseño web profesional y herramientas gratuitas
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Constantes
+    const SLIDE_W = 1080, SLIDE_H = 1350, MAX_SLIDES = 7;
+    const PREVIEW_SLIDE_W = 120; // ancho por slide en la miniatura (máx 7 -> 840px)
+    const PREVIEW_H = Math.round(PREVIEW_SLIDE_W * (SLIDE_H / SLIDE_W)); // 150
+
+    // ---------- SECCIÓN 1: Generar lienzo ----------
+    const slidesGenInput = document.getElementById('slidesGen');
+    const previewGen = document.getElementById('previewGen');
+    const badgeGen = document.getElementById('badgeGen');
+
+    function clampSlides(n){ return Math.max(1, Math.min(MAX_SLIDES, Number(n)||1)); }
+
+    function drawGenPreview(){
+      const slides = clampSlides(slidesGenInput.value);
+      badgeGen.textContent = slides;
+      // miniatura
+      previewGen.width = PREVIEW_SLIDE_W * slides;
+      previewGen.height = PREVIEW_H;
+      const ctx = previewGen.getContext('2d');
+      ctx.clearRect(0,0,previewGen.width, previewGen.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0,0,previewGen.width, previewGen.height);
+      // guías + numeración
+      ctx.strokeStyle = '#e8e8e8';
+      ctx.lineWidth = 2;
+      ctx.font = 'bold 12px -apple-system, system-ui';
+      ctx.fillStyle = '#666666';
+      for(let i=0;i<slides;i++){
+        const x = i * PREVIEW_SLIDE_W;
+        ctx.strokeRect(x, 0, PREVIEW_SLIDE_W, PREVIEW_H);
+        ctx.fillText(`${i+1}`, x+8, 18);
+      }
+    }
+
+    function downloadRealCanvas(){
+      const slides = clampSlides(slidesGenInput.value);
+      const real = document.createElement('canvas');
+      real.width = SLIDE_W * slides;
+      real.height = SLIDE_H;
+      const ctx = real.getContext('2d');
+      // fondo blanco
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0,0,real.width, real.height);
+      // guías reales
+      ctx.strokeStyle = '#00d4ff';
+      ctx.lineWidth = 3;
+      for(let i=1;i<slides;i++){
+        const x = i * SLIDE_W;
+        ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,real.height); ctx.stroke();
+      }
+      const a = document.createElement('a');
+      a.download = `lienzo_${slides}_diapositivas.png`;
+      a.href = real.toDataURL('image/png');
+      a.click();
+    }
+
+    slidesGenInput.addEventListener('input', () => {
+      // limitar al vuelo a 7
+      if(Number(slidesGenInput.value) > MAX_SLIDES){ slidesGenInput.value = MAX_SLIDES; }
+      drawGenPreview();
+    });
+    document.getElementById('btnDownload').addEventListener('click', downloadRealCanvas);
+    drawGenPreview();
+
+    // ---------- SECCIÓN 2: Cortar imagen ----------
+    const upload = document.getElementById('upload');
+    const slidesCutInput = document.getElementById('slidesCut');
+    const btnCut = document.getElementById('btnCut');
+    const previewCut = document.getElementById('previewCut');
+    const badgeCut = document.getElementById('badgeCut');
+    let imgLoaded = null;
+
+    upload.addEventListener('change', (e)=>{
+      const file = e.target.files?.[0];
+      if(!file){ return; }
+      const img = new Image();
+      img.onload = ()=>{
+        imgLoaded = img;
+        // sugerir número por ancho real (redondeado), limitado a 7
+        const suggested = clampSlides(Math.round(img.width / SLIDE_W));
+        slidesCutInput.value = suggested;
+        slidesCutInput.disabled = false;
+        btnCut.disabled = false;
+        drawCutPreview();
+      };
+      img.src = URL.createObjectURL(file);
+    });
+
+    slidesCutInput.addEventListener('input', ()=>{
+      if(Number(slidesCutInput.value) > MAX_SLIDES){ slidesCutInput.value = MAX_SLIDES; }
+      if(!imgLoaded) return;
+      drawCutPreview();
+    });
+
+    function drawImageCover(ctx, img, dx, dy, dW, dH){
+      // emula object-fit: cover para la preview
+      const ir = img.width / img.height;
+      const dr = dW / dH;
+      let sx, sy, sW, sH;
+      if(ir > dr){
+        // imagen más ancha: recortamos lados
+        sH = img.height; sW = sH * dr; sx = (img.width - sW)/2; sy = 0;
+      }else{
+        // imagen más alta: recortamos arriba/abajo
+        sW = img.width; sH = sW / dr; sx = 0; sy = (img.height - sH)/2;
+      }
+      ctx.drawImage(img, sx, sy, sW, sH, dx, dy, dW, dH);
+    }
+
+    function drawCutPreview(){
+      const slides = clampSlides(slidesCutInput.value);
+      badgeCut.textContent = slides;
+      const width = PREVIEW_SLIDE_W * slides;
+      const height = PREVIEW_H;
+      previewCut.width = width; previewCut.height = height;
+      const ctx = previewCut.getContext('2d');
+      ctx.clearRect(0,0,width,height);
+      // fondo + imagen en cover (si existe)
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,width,height);
+      if(imgLoaded){ drawImageCover(ctx, imgLoaded, 0, 0, width, height); }
+      // guías
+      ctx.strokeStyle = '#00d4ff'; ctx.lineWidth = 2; ctx.font='bold 12px -apple-system, system-ui'; ctx.fillStyle='#666666';
+      for(let i=1;i<slides;i++){
+        const x = i * PREVIEW_SLIDE_W;
+        ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,height); ctx.stroke();
+      }
+      for(let i=0;i<slides;i++){
+        ctx.fillText(`${i+1}`, i*PREVIEW_SLIDE_W + 8, 18);
+      }
+    }
+
+    btnCut.addEventListener('click', ()=>{
+      if(!imgLoaded) return alert('Primero sube una imagen.');
+      const slides = clampSlides(slidesCutInput.value);
+      const srcSliceW = imgLoaded.width / slides;
+      for(let i=0;i<slides;i++){
+        const c = document.createElement('canvas');
+        c.width = SLIDE_W; c.height = SLIDE_H;
+        const cx = c.getContext('2d');
+        // recortar parte proporcional de la imagen y escalar a 1080x1350
+        cx.drawImage(
+          imgLoaded,
+          i*srcSliceW, 0, srcSliceW, imgLoaded.height,
+          0, 0, SLIDE_W, SLIDE_H
+        );
+        const a = document.createElement('a');
+        a.download = `slide_${i+1}.png`;
+        a.href = c.toDataURL('image/png');
+        a.click();
+      }
+    });
+  </script>
+</body>
+</html>
