@@ -300,7 +300,7 @@
                 <li><a href="#pricing">Precios</a></li>
                 <li><a href="#contact">Contacto</a></li>
                 <li><a href="./visitas/">Visitas</a></li>
-                <li><a href="./carrusel/">Carruseles</a></li>
+                <li><a href="#herramientas">Herramientas</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
@@ -634,98 +634,8 @@
         </div>
     </section>
 
-
-
-
-
-    <style>
-        .sabias-que {
-            background: #f9f9f9;
-            padding: 60px 20px;
-        }
-
-        .titulo-seccion {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #222;
-            font-weight: 700;
-        }
-
-        .acordeon {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .acordeon-item {
-            margin-bottom: 12px;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .acordeon-titulo {
-            width: 100%;
-            text-align: left;
-            background: #fff;
-            border: none;
-            padding: 18px 22px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #111;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
-        }
-
-        .acordeon-titulo:hover {
-            background: #f1f1f1;
-        }
-
-        .acordeon-titulo .icono {
-            transition: transform 0.3s ease;
-            font-size: 1rem;
-            color: #444;
-        }
-
-        .acordeon-contenido {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-            padding: 0 22px;
-        }
-
-        .acordeon-contenido p {
-            color: #555;
-            line-height: 1.6;
-            margin: 16px 0;
-        }
-
-        /* Estado activo */
-        .acordeon-item.activo .acordeon-contenido {
-            max-height: 500px;
-            padding: 0 22px 18px;
-        }
-
-        .acordeon-item.activo .icono {
-            transform: rotate(180deg);
-        }
-    </style>
     <script>
-        document.querySelectorAll(".acordeon-titulo").forEach(boton => {
-            boton.addEventListener("click", () => {
-                const item = boton.parentElement;
-                item.classList.toggle("activo");
 
-                // Cierra los demás
-                document.querySelectorAll(".acordeon-item").forEach(el => {
-                    if (el !== item) el.classList.remove("activo");
-                });
-            });
-        });
     </script>
 
 
@@ -1106,6 +1016,114 @@
             </p>
         </div>
     </section>
+
+    <section class="herramientas" id="herramientas">
+        <div class="container">
+            <h2 class="titulo-seccion">Herramientas Digitales</h2>
+
+            <div class="herramienta">
+                <div class="texto">
+                    <h3>Generador de Lienzos para Instagram</h3>
+                    <p>Crea <strong>carruseles de Instagram</strong> fácilmente con un lienzo dividido en secciones.
+                        Previsualiza, edita y descarga tu diseño en segundos.</p>
+                    <a href="https://liotcoredesigns.com/carrusel/" class="link-herramienta">
+                        Probar el Generador de Carruseles para Instagram
+                    </a>
+                </div>
+            </div>
+
+            <div class="herramienta">
+                <div class="texto">
+                    <h3>Invitaciones Digitales Personalizadas</h3>
+                    <p>Diseña <strong>invitaciones digitales interactivas</strong> con colores, texto, imágenes y música
+                        personalizadas para compartir en línea.</p>
+                    <a href="https://lirium.com.mx/PanelCreative" class="link-herramienta">
+                        Crear Invitaciones Digitales Personalizadas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <style>
+        .herramientas {
+            background: #fff;
+            padding: 60px 20px;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .titulo-seccion::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ff9f9f);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        .herramienta {
+            border-top: 1px solid #eee;
+            padding: 35px 0;
+            transition: background 0.3s ease;
+        }
+
+        .herramienta:last-child {
+            border-bottom: 1px solid #eee;
+        }
+
+        .herramienta:hover {
+            background: #fafafa;
+        }
+
+        .herramienta .texto h3 {
+            font-size: 1.4rem;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .herramienta .texto p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .link-herramienta {
+            font-weight: 600;
+            color: #ff6b6b;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        .link-herramienta::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6b6b;
+            transition: width 0.3s ease;
+        }
+
+        .link-herramienta:hover::after {
+            width: 100%;
+        }
+    </style>
+
 
 
     <!-- Contact Section -->

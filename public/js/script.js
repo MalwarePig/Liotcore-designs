@@ -553,3 +553,15 @@ const liotCoreApp = new LiotCoreApp();
 
 // Opcional: expón solo en desarrollo (descomenta si necesitas depurar)
 // window.liotCoreApp = liotCoreApp;
+
+ document.querySelectorAll(".acordeon-titulo").forEach(boton => {
+            boton.addEventListener("click", () => {
+                const item = boton.parentElement;
+                item.classList.toggle("activo");
+
+                // Cierra los demás
+                document.querySelectorAll(".acordeon-item").forEach(el => {
+                    if (el !== item) el.classList.remove("activo");
+                });
+            });
+        });
